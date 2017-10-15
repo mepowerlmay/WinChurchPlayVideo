@@ -66,9 +66,9 @@ namespace WinChurchPlayVideo
                 DataTable dt = new DataTable();
                 string sql = " select VideoAddress from Customer where BarcodeNumber = '" + txtBarcode.Text + "' ";
 
-                using ( SqlConnection conn = new SqlConnection(StrConn))
+                using (SqlConnection conn = new SqlConnection(StrConn))
                 {
-                    using ( SqlCommand cmd = new SqlCommand(sql, conn))
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         conn.Open();
                         dt.Load(cmd.ExecuteReader());
@@ -91,7 +91,7 @@ namespace WinChurchPlayVideo
                     MessageBox.Show("查無影片資訊");
                 }
 
-               
+
             }
             else
             {

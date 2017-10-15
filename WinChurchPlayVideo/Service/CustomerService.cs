@@ -100,6 +100,34 @@ namespace WinChurchPlayVideo.Service
 
         }
 
+
+        /// <summary>
+        /// 取得所有姓氏清單
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllName() {
+
+            DataTable dt = new DataTable();
+            string sql = @"select distinct left([CustomerName],1) as username from [dbo].[Customer]";
+
+
+
+            using (SqlConnection conn = new SqlConnection(StrConn))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+
+                   
+                    dt.Load(cmd.ExecuteReader());
+                }
+            }
+
+            return dt;
+
+        }
+
+
         /// <summary>
         /// 取得姓名 清單
         /// </summary>
