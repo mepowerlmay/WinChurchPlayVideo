@@ -5,6 +5,7 @@ using System.Text;
 
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.OleDb;
 
 namespace WinChurchPlayVideo.Common
 {
@@ -12,14 +13,14 @@ namespace WinChurchPlayVideo.Common
     {
         public void appendCriteria(string parameterName, string value,
             string criteria, ref string where,
-            ref List<SqlParameter> parameters)
+            ref List<OleDbParameter> parameters)
         {
             appendCriteria(parameterName, value, criteria,
-                ref where, ref parameters, SqlDbType.Char);
+                ref where, ref parameters,  OleDbType .Char);
         }
         public void appendCriteria(string parameterName, string value,
             string criteria, ref string where,
-            ref List<SqlParameter> parameters, SqlDbType dbType)
+            ref List<OleDbParameter> parameters, OleDbType dbType)
         {
 
             if (string.IsNullOrEmpty(value)) return;
@@ -27,7 +28,7 @@ namespace WinChurchPlayVideo.Common
             string cond = string.Format(criteria, "@" + parameterName);
             where += " AND " + cond;
 
-            var p = new SqlParameter(parameterName, dbType);
+            var p = new OleDbParameter(parameterName, dbType);
             p.Value = value;
             parameters.Add(p);
         }

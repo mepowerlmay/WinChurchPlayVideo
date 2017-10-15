@@ -16,7 +16,7 @@ namespace WinChurchPlayVideo
     public partial class frmCustomer : Form
     {
 
-        private string StrConn { get { return ConfigurationManager.ConnectionStrings["conn"].ConnectionString; } }
+        private string StrConn { get { return ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString; } }
 
 
         private CustomerService service { get; set; }

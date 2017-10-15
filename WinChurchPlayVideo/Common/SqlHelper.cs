@@ -21,11 +21,11 @@ namespace WinChurchPlayVideo.Common
         /// <returns>回傳 OleDbParameter[] 跟 string   sql</returns>
         public static string GenerateSQL_Ins(Dictionary<string, string> record,
                                     string tableName,
-            out SqlParameter[] parameters)
+            out OleDbParameter[] parameters)
         {       
             
 
-            var parameterList = new List<SqlParameter>();
+            var parameterList = new List<OleDbParameter>();
             var sqlTemplate = "INSERT INTO {0}({1}) VALUES({2})";
             var colList = string.Empty;
             var valueList = string.Empty;
@@ -47,7 +47,7 @@ namespace WinChurchPlayVideo.Common
                 }
                 valueList += "@" + columnName;
 
-                SqlParameter p = new SqlParameter(columnName, value);
+                OleDbParameter p = new OleDbParameter(columnName, value);
                 parameterList.Add(p);
             }
 
@@ -67,11 +67,11 @@ namespace WinChurchPlayVideo.Common
         /// <returns>回傳 OleDbParameter[] 跟 string   sql</returns>
         public static string GenerateSQL_Update(Dictionary<string, string> record,
                                     string tableName,
-            out SqlParameter[] parameters)
+            out OleDbParameter[] parameters)
         {
 
 
-            var parameterList = new List<SqlParameter>();
+            var parameterList = new List<OleDbParameter>();
             var sqlTemplate = "update  {0} set {1}";          
             var valueList = string.Empty;
 
@@ -89,7 +89,7 @@ namespace WinChurchPlayVideo.Common
 
                 valueList += string.Concat(columnName, "=@", columnName);
 
-               SqlParameter p = new SqlParameter(columnName, value);
+                OleDbParameter p = new OleDbParameter(columnName, value);
                 parameterList.Add(p);
             }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace WinChurchPlayVideo.Service
 {
    public  class CustomerService : IDisposable
     {
-        private string StrConn { get { return ConfigurationManager.ConnectionStrings["conn"].ConnectionString; } }
+        private string StrConn { get { return ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString; } }
 
         /// <summary>
         /// 取得 單筆資料
@@ -24,9 +25,9 @@ namespace WinChurchPlayVideo.Service
 
             string sql = "select * from Customer where ID =" + ID + "";
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
 
@@ -46,9 +47,9 @@ namespace WinChurchPlayVideo.Service
         {
             string sql = "delete from Customer where ID =" + ID + "";
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
 
@@ -72,7 +73,7 @@ namespace WinChurchPlayVideo.Service
         public DataTable GetAll(string txtArea,string txtCustomerName,string txtBarcodeNumber) {
             DataTable dt = new DataTable();
             var wherebuilder = new WhereClausesBuilder();
-            var parameters = new List<SqlParameter>();
+            var parameters = new List<OleDbParameter>();
 
 
             string sql = "select * from Customer ";
@@ -85,9 +86,9 @@ namespace WinChurchPlayVideo.Service
             sql += where;
 
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
             
@@ -112,9 +113,9 @@ namespace WinChurchPlayVideo.Service
 
 
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
 
@@ -136,7 +137,7 @@ namespace WinChurchPlayVideo.Service
         public DataTable GetAll(string txtCustomerName) {
             DataTable dt = new DataTable();
             var wherebuilder = new WhereClausesBuilder();
-            var parameters = new List<SqlParameter>();
+            var parameters = new List<OleDbParameter>();
 
 
             string sql = "select * from Customer ";
@@ -148,9 +149,9 @@ namespace WinChurchPlayVideo.Service
             sql += where;
 
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
 

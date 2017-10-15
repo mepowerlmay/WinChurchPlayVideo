@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using System.Data.OleDb;
+using System.Configuration;
+using System.Data;
+
 namespace WinChurchPlayVideo
 {
     static class Program
@@ -19,5 +23,5 @@ namespace WinChurchPlayVideo
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain(args));
         }
-    }
+}
 }

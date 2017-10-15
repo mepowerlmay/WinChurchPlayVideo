@@ -15,7 +15,7 @@ namespace WinChurchPlayVideo
         /// </summary>
         private string BarCode;
 
-        private string StrConn { get { return ConfigurationManager.ConnectionStrings["conn"].ConnectionString; } }
+        private string StrConn { get { return ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString; } }
 
         public frmPlayForm()
         {
@@ -66,9 +66,9 @@ namespace WinChurchPlayVideo
                 DataTable dt = new DataTable();
                 string sql = " select VideoAddress from Customer where BarcodeNumber = '" + txtBarcode.Text + "' ";
 
-                using (SqlConnection conn = new SqlConnection(StrConn))
+                using (OleDbConnection conn = new OleDbConnection(StrConn))
                 {
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                     {
                         conn.Open();
                         dt.Load(cmd.ExecuteReader());

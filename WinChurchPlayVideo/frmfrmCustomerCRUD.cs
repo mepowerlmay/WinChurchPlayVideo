@@ -20,7 +20,7 @@ namespace WinChurchPlayVideo
 
         private long Id;
 
-        private string StrConn { get { return ConfigurationManager.ConnectionStrings["conn"].ConnectionString; } }
+        private string StrConn { get { return ConfigurationManager.ConnectionStrings["Database1ConnectionString"].ConnectionString; } }
 
         public frmfrmCustomerCRUD()
         {
@@ -62,16 +62,24 @@ namespace WinChurchPlayVideo
             string sql = "select * from Customer where ID =" + p + " ";
           
             DataTable dt = new DataTable();
-
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            try
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbConnection conn = new OleDbConnection(StrConn))
                 {
-                    conn.Open();
-                    cmd.CommandText = sql;
-                    dt.Load(cmd.ExecuteReader());
+                    using (OleDbCommand cmd = new OleDbCommand(sql, conn))
+                    {
+                        conn.Open();
+                        cmd.CommandText = sql;
+                        dt.Load(cmd.ExecuteReader());
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+          
 
 
             if (dt.Rows.Count > 0)
@@ -136,7 +144,7 @@ namespace WinChurchPlayVideo
         }
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            SqlParameter[] parameters;
+            OleDbParameter[] parameters;
             int resultCount = 0;
             var dics = new Dictionary<string, string>();
             dics.Add("CustomerName", CustomerName.Text);
@@ -152,9 +160,9 @@ namespace WinChurchPlayVideo
 
 
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
                     cmd.CommandText = sql;
@@ -176,7 +184,7 @@ namespace WinChurchPlayVideo
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
-            SqlParameter[] parameters;
+            OleDbParameter[] parameters;
             int resultCount = 0;
             var dics = new Dictionary<string, string>();
             dics.Add("CustomerName", CustomerName.Text);
@@ -190,9 +198,9 @@ namespace WinChurchPlayVideo
 
 
 
-            using (SqlConnection conn = new SqlConnection(StrConn))
+            using (OleDbConnection conn = new OleDbConnection(StrConn))
             {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (OleDbCommand cmd = new OleDbCommand(sql, conn))
                 {
                     conn.Open();
                     cmd.CommandText = sql;
