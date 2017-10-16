@@ -109,7 +109,7 @@ namespace WinChurchPlayVideo.Service
         public DataTable GetAllName() {
 
             DataTable dt = new DataTable();
-            string sql = @"select distinct left([CustomerName],1) as username from [dbo].[Customer]";
+            string sql = @"select distinct left([CustomerName],1) as username from  [Customer]";
 
 
 
